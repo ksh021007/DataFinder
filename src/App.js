@@ -54,8 +54,35 @@ function App() {
   };
 
   useEffect(() => {
-    fetchFileFromPublic();
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !searchInputRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // 2. 파일을 선택하는 이벤트 핸들러 작성
+  const handleFileSelect = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const text = await file.text();
+        const lines = text.split('\n').filter((line) => line.trim() !== '');
+        const parsedNodes = parseCommaText(lines);
+        setNodes(parsedNodes);
+        setSearchResults([]);
+      } catch (error) {
+        console.error('파일을 읽는 데 오류가 발생했습니다.', error);
+      }
+    }
+  };
 
   const renderTree = (nodes) => {
     return nodes.map((node) => {
@@ -170,6 +197,21 @@ function App() {
     [nodes]
   );
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const lines = text.split('\n').filter((line) => line.trim() !== '');
+        const parsedNodes = parseCommaText(lines);
+        setNodes(parsedNodes);
+        setSearchResults([]);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   const searchNodes = (nodes, searchTerm, matches, openNodes) => {
     nodes.forEach((node) => {
       if (node.label.toLowerCase().includes(searchTerm)) {
@@ -241,20 +283,6 @@ function App() {
 
   const filteredNodes = nodes;
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        !searchInputRef.current.contains(event.target)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   // 엔터 키 눌렀을 때 검색 버튼 클릭 이벤트로 연결
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -265,6 +293,31 @@ function App() {
   return (
     <div className="App">
       <h1>File Explorer</h1>
+
+      <div
+        style={{
+          position: 'absolute', // 고정 위치
+          top: '90px', // 상단 위치
+          right: '20px', // 우측 위치
+          zIndex: 1000, // 다른 요소 위에 나타나도록
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <input
+          type="file"
+          accept=".txt"
+          onChange={handleFileChange}
+          style={{
+            padding: '5px', // 크기 줄이기
+            fontSize: '12px', // 글자 크기 조정
+            width: '240px', // 너비 줄이기
+            borderRadius: '5px',
+            border: '1px solid #ddd',
+          }}
+        />
+      </div>
 
       <div
         style={{
@@ -289,6 +342,7 @@ function App() {
           left: '20px',
           zIndex: 1000,
           display: 'flex',
+
           alignItems: 'center',
         }}
       >
