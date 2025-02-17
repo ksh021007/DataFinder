@@ -1,0 +1,108 @@
+/* App.css */
+
+/* Node and Search Result 공통 스타일 */
+/* 노드와 검색 결과의 기본 스타일 */
+.node {
+  padding: 5px; /* 패딩 추가 */
+  cursor: pointer; /* 마우스 커서 모양을 포인터로 변경 */
+  background-color: #b3b2b2; /* 배경색 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  margin-bottom: 5px; /* 아래 여백 추가 */
+}
+
+/* 노드에 마우스를 올렸을 때의 스타일 */
+.node:hover {
+  background-color: #e0e0e0; /* 배경색을 조금 더 어두운 색으로 변경 */
+}
+
+/* 검색 결과의 기본 스타일 */
+.search-result {
+  cursor: pointer; /* 마우스 커서 모양을 포인터로 변경 */
+  padding: 5px; /* 패딩 추가 */
+  background-color: #f9f9f9; /* 배경색 */
+  margin: 5px; /* 여백 추가 */
+}
+
+/* 검색 결과에 마우스를 올렸을 때의 스타일 */
+.search-result:hover {
+  background-color: #e0e0e0; /* 배경색을 조금 더 어두운 색으로 변경 */
+}
+
+/* 강조된 텍스트 스타일 */
+.highlight {
+  background-color: yellow; /* 강조된 텍스트의 배경색을 노란색으로 설정 */
+  color: black; /* 텍스트 색상을 검은색으로 설정 */
+}
+
+/* 검색 결과 드롭다운 목록 스타일 */
+#searchResults {
+  background: white; /* 배경색 */
+  border: 1px solid #ddd; /* 테두리 색 */
+  max-height: 600px; /* 최대 높이를 600px로 설정 */
+  overflow-y: auto; /* 세로 스크롤이 가능하도록 설정 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  position: absolute; /* 위치를 절대 위치로 설정 */
+  top: 70px; /* 상단에서 70px 떨어지게 설정 */
+  left: 20px; /* 좌측에서 20px 떨어지게 설정 */
+  width: 300px; /* 가로 크기 300px 설정 */
+  z-index: 1000; /* 다른 요소 위에 표시될 수 있도록 z-index 설정 */
+}
+
+/* 경로 표시 영역 스타일 */
+#pathDisplay {
+  position: fixed; /* 화면에 고정된 위치에 표시 */
+  top: 20px; /* 상단에서 20px 떨어지게 설정 */
+  left: 470px; /* 왼쪽에서 470px 떨어지게 설정 */
+  right: 220px; /* 오른쪽에서 220px 떨어지게 설정 */
+  background-color: white; /* 배경색 */
+  z-index: 1000; /* 다른 요소 위에 표시될 수 있도록 z-index 설정 */
+  padding: 10px; /* 패딩 추가 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  font-weight: bold; /* 텍스트를 두껍게 */
+}
+
+/* 버튼 스타일 (일반 버튼) */
+button {
+  padding: 8px 12px; /* 패딩 추가 */
+  cursor: pointer; /* 마우스 커서 모양을 포인터로 변경 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  border: 1px solid #ddd; /* 테두리 색 */
+  background-color: #007bff; /* 배경색 */
+  color: white; /* 텍스트 색을 흰색으로 설정 */
+}
+
+/* 버튼에 마우스를 올렸을 때 스타일 */
+button:hover {
+  background-color: #0056b3; /* 배경색을 좀 더 어두운 파란색으로 변경 */
+}
+
+/* 고정된 위치에서 스크롤 버튼 스타일 */
+/* 하단 80px에 위치한 버튼 */
+button[style*='bottom: 80px'] {
+  width: 40px; /* 너비 40px */
+  height: 40px; /* 높이 40px */
+  background-color: #007bff; /* 배경색 */
+  color: white; /* 텍스트 색 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer; /* 마우스 커서 모양을 포인터로 변경 */
+  display: flex; /* flexbox로 설정 */
+  align-items: center; /* 세로로 가운데 정렬 */
+  justify-content: center; /* 가로로 가운데 정렬 */
+  font-size: 20px; /* 글자 크기 20px */
+  padding: 0; /* 패딩 제거 */
+}
+
+/* 하단 20px에 위치한 버튼 */
+button[style*='bottom: 20px'] {
+  width: 40px; /* 너비 40px */
+  height: 40px; /* 높이 40px */
+  background-color: #007bff; /* 배경색 */
+  color: white; /* 텍스트 색 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer; /* 마우스 커서 모양을 포인터로 변경 */
+  display: flex; /* flexbox로 설정 */
+  align-items: center; /* 세로로 가운데 정렬 */
+  justify-content: center; /* 가로로 가운데 정렬 */
+  font-size: 20px; /* 글자 크기 20px */
+  padding: 0; /* 패딩 제거 */
+}
